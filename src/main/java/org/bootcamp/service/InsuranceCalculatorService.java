@@ -2,10 +2,11 @@ package org.bootcamp.service;
 
 import org.bootcamp.calculator.InsurancePolicyCalculator;
 import org.bootcamp.dao.VehicleInfoDao;
-import org.bootcamp.dao.VehicleInfoJsonFileDao;
 import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
 import org.bootcamp.vehicle.Vehicle;
+import org.springframework.stereotype.Component;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -13,13 +14,13 @@ import java.util.List;
 
 import static org.bootcamp.service.ConversionUtils.getVehicle;
 
+@Component
 public final class InsuranceCalculatorService {
 
-    private final VehicleInfoDao dao;
+    private VehicleInfoDao dao;
 
-    public InsuranceCalculatorService(String filePath) {
-
-        this.dao = new VehicleInfoJsonFileDao(filePath);
+    public InsuranceCalculatorService(VehicleInfoDao dao) {
+        this.dao = dao;
     }
 
     public List<InsuranceCalculationResult> calculateAll() {
